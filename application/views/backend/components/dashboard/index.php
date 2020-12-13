@@ -11,13 +11,13 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3>total</h3>
+            <h3><?php echo $row_product = $this->model_pro->select_product_num(1); ?></h3>
             <p>Sản phẩm</p>
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
           </div>
-          <a href="admin/product" class="small-box-footer">Danh sách sản phẩm</a>
+          <a href="/ShopMinh/product/index" class="small-box-footer">Danh sách sản phẩm</a>
         </div>
       </div>
       <!-- ./col -->
@@ -25,13 +25,13 @@
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>total2</h3>
+            <h3><?php echo $row_content = $this->model_content->select_content_num(1); ?></h3>
             <p>Bài viết</p>
           </div>
           <div class="icon">
             <i class="ion ion-android-chat "></i>
           </div>
-          <a href="admin/content" class="small-box-footer">Danh sách bài viết</a>
+          <a href="/ShopMinh/content/index" class="small-box-footer">Danh sách bài viết</a>
         </div>
       </div>
       <!-- ./col -->
@@ -39,13 +39,13 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>total 3</h3>
+            <h3><?php echo $row_contact = $this->model_contact->select_contact_num(1); ?></h3>
             <p>Liên hệ</p>
           </div>
           <div class="icon">
             <i class="ion ion-email"></i>
           </div>
-          <a href="admin/customer" class="small-box-footer">Liên hệ khách hàng</a>
+          <a href="/ShopMinh/customer/index" class="small-box-footer">Liên hệ khách hàng</a>
         </div>
       </div>
       <!-- ./col -->
@@ -59,7 +59,7 @@
           <div class="icon">
             <i class="ion ion-cube"></i>
           </div>
-          <a href="admin/orders" class="small-box-footer">Danh sách đơn hàng</a>
+          <a href="/ShopMinh/orders/index" class="small-box-footer">Danh sách đơn hàng</a>
         </div>
       </div>
       <!-- ./col -->

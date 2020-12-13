@@ -3,7 +3,7 @@
     <section class="sidebar">
         <ul class="sidebar-menu">
             <li class="treeview">
-                <a href="/ShopMinh/dashboard">
+                <a href="/ShopMinh/dashboard/index">
                     <i class="fa fa-bar-chart"></i> <span>Thống kê</span>
                 </a>
             </li>
@@ -70,14 +70,14 @@
                 </li>
                 neu vai tro bang 1 thi:
                 <li>
-                    <a href="/ShopMinh/useradmin/index">
+                    <a href="/ShopMinh/user/index">
                         <i class="fa fa-users"></i> Nhân viên
                     </a>
                 </li>
                 
             </ul>
         </li>
-        <li><a href="admin/user/logout.html"><i class="fa fa-sign-out text-red"></i> <span>Thoát</span></a></li>
+        <li><a href="/ShopMinh/user/logout"><i class="fa fa-sign-out text-red"></i> <span>Thoát</span></a></li>
     </ul>
 </section>
 <!-- /.sidebar -->

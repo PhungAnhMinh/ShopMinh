@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 <div class="content-wrapper">
-    <form action="/ShopMinh/useradmin/insert" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
+    <form action="/ShopMinh/user/insert" enctype="multipart/form-data" method="POST" accept-charset="utf-8">
         <section class="content-header">
             <h1><i class="fa fa-user-plus"></i> Thêm thành viên</h1>
             <div class="breadcrumb">
@@ -8,7 +8,7 @@
                     <span class="glyphicon glyphicon-floppy-save"></span>
                     Lưu[Thêm]
                 </button>
-                <a class="btn btn-primary btn-sm" href="/ShopMinh/useradmin/index" role="button">
+                <a class="btn btn-primary btn-sm" href="/ShopMinh/user/index" role="button">
                     <span class="glyphicon glyphicon-remove do_nos"></span> Thoát
                 </a>
             </div>
@@ -33,12 +33,18 @@
                                 <div class="form-group">
                                     <label>Email <span class = "maudo">(*)</span></label>
                                     <input required  type="email" class="form-control" name="email" >
-                                    
+                                <?php if(isset($_COOKIE['error_email'])){ ?>
+                                    <div class="error" style="color: red" id="password_error"><?php echo $_COOKIE['error_email'];?>
+                                    </div>
+                                <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Tên đăng nhập <span class = "maudo">(*)</span></label>
                                     <input required  type="text" class="form-control" name="username" >
-                                    
+                                <?php if(isset($_COOKIE['error_username'])){ ?>
+                                    <div class="error" style="color: red" id="password_error"><?php echo $_COOKIE['error_username'];?>
+                                    </div>
+                                <?php } ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Mật khẩu <span class = "maudo">(*)</span></label>
@@ -46,8 +52,16 @@
                                     
                                 </div>
                                 <div class="form-group">
+                                    <label>Nhập lại mật khẩu <span class = "maudo">(*)</span></label>
+                                    <input required  type="password" class="form-control" name="repassword" >
+                                <?php if(isset($_COOKIE['error_pass'])){ ?>
+                                    <div class="error" style="color: red" id="password_error"><?php echo $_COOKIE['error_pass'];?>
+                                    </div>
+                                <?php } ?>
+                                </div>
+                                <div class="form-group">
                                     <label>Số điện thoại <span class = "maudo">(*)</span></label>
-                                    <input required  type="text" class="form-control" name="phone" >
+                                    <input required  type="number" class="form-control" name="phone" >
                                     
                                 </div>
                                 <div class="form-group">
@@ -59,16 +73,27 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label>Giới tính</label>
+                                    <select name="gender" class="form-control">
+                                        <option value="1">Nam</option>
+                                        <option value="0">Nữ</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    
                                     <label>Quyền<span class = "maudo">(*)</span></label>
                                     <select required name="role" class="form-control">
                                         <option value = "">[--Chọn danh mục--]</option>
-                                            
+                                        <?php  
+                                        foreach ($data['user'] as $row) {
+                                            echo "<option value='".$row['id_gr']."'>".$row['name_gr']."</option>";
+                                    }?>
                                          
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Ảnh đại diện</label>
-                                    <input  required type="file"  id="image_list" name="img">
+                                    <input  required type="file"  id="image_list" name="thumbnail">
                                 </div>
                                 <div class="form-group">
                                     <label>Trạng thái</label>

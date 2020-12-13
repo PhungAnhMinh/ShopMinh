@@ -54,7 +54,7 @@
 											</td>
 											<td><?php echo $row['link']; ?></td>
 											<td class="text-center">
-												<a href="/ShopMinh/slider/index/<?php echo $row['id']; ?>">
+												<a href="/ShopMinh/slider/status/<?php echo $row['id']; ?>">
 													<?php if($row['status']==1){ ?>
 														<span class="glyphicon glyphicon-ok-circle mauxanh18"></span>
 													<?php }else{ ?>

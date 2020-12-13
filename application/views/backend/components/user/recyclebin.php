@@ -3,7 +3,7 @@
 	<section class="content-header">
 		<h1><i class="glyphicon glyphicon-cd"></i> Thùng rác tài khoản</h1>
 		<div class="breadcrumb">
-			<a class="btn btn-primary btn-sm" href="/ShopMinh/useradmin/index" role="button">
+			<a class="btn btn-primary btn-sm" href="/ShopMinh/user/index" role="button">
 				<span class="glyphicon glyphicon-remove do_nos"></span> Thoát
 			</a>
 		</div>
@@ -40,7 +40,7 @@
 										</tr>
 									</thead>
 									<tbody>
-									<?php foreach ($data['useradmin'] as $row) {?>
+									<?php foreach ($data['user'] as $row) {?>
 										<tr>
 											<td class="text-center"><?php echo $row['id']; ?></td>
 											<td>
@@ -49,12 +49,12 @@
 											<td><?php echo $row['email']; ?></td>
 											<td><?php echo $row['phone']; ?></td>
 											<td class="text-center">
-												<a class="btn btn-success btn-xs" href="/ShopMinh/useradmin/restore/<?php echo $row['id']; ?>" role = "button">
+												<a class="btn btn-success btn-xs" href="/ShopMinh/user/restore/<?php echo $row['id']; ?>" role = "button">
 													<span class="glyphicon glyphicon-edit"></span> Khôi phục
 												</a>
 											</td>
 											<td class="text-center">
-												<a class="btn btn-danger btn-xs" href="/ShopMinh/useradmin/delete/<?php echo $row['id']; ?>" onclick="return confirm('Xác nhận xóa loại sản phẩm này ?')" role = "button">
+												<a class="btn btn-danger btn-xs" href="/ShopMinh/user/delete/<?php echo $row['id']; ?>" onclick="return confirm('Xác nhận xóa loại sản phẩm này ?')" role = "button">
 													<span class="glyphicon glyphicon-trash"></span>Xóa VV
 												</a>
 											</td>
@@ -66,7 +66,7 @@
 							<div class="row">
 								<div class="col-md-12 text-center">
 									<ul class="pagination">
-										phan trang
+										<?php echo $data['phantrang']; ?>
 									</ul>
 								</div>
 							</div>

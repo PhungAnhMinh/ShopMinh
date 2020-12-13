@@ -3,7 +3,7 @@
 	<section class="content-header">
 		<h1><i class="glyphicon glyphicon-list-alt"></i> Thùng rác đơn hàng</h1>
 		<div class="breadcrumb">
-			<a class="btn btn-primary btn-sm" href="admin/orders" role="button">
+			<a class="btn btn-primary btn-sm" href="/ShopMinh/orders/index" role="button">
 				<span class="glyphicon glyphicon-remove do_nos"></span> Thoát
 			</a>
 		</div>
@@ -18,17 +18,12 @@
 						<div class="box-body">
 							
 								<div class="row">
+									<?php if(isset($_COOKIE['msg'])){ ?>
 									<div class="alert alert-success">
-										
-										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<?php echo $_COOKIE['msg']; ?>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 									</div>
-								</div>
-							
-								<div class="row">
-									<div class="alert alert-error">
-										
-										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-									</div>
+								<?php } ?>
 								</div>
 							
 							<div class="row" style='padding:0px; margin:0px;'>
@@ -47,41 +42,51 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+											<?php foreach ($data['orders'] as $row) {?>
 												<tr>
-													<td class="text-center">order code</td>
-													<td>full name</td>
-													<td>phone</td>
-													<td>476547₫</td>
-													<td>order code</td>
+													<td class="text-center"><?php echo $row['orderCode']; ?></td>
+													<td><?php echo $row['fullname']; ?></td>
+													<td><?php echo $row['phone']; ?></td>
+													<td><?php echo $row['money']; ?></td>
+													<td><?php echo $row['orderDate']; ?></td>
 													<td style="text-align: center;">
-														Đang chờ duyệt
-															 <br>
-															 dang giao hang
-															<br>
-															da giao
-															<br>
-															khach da huy
-															<br>
-															Nhan vien da huy
+														<?php  
+															switch ($row['status']) {
+																case '0':
+																	echo "Đang chờ duyệt";
+																	break;
+																case '1':
+																	echo "Đang giao hàng";
+																	break;
+																case '2':
+																	echo "Đã giao";
+																	break;
+																case '3':
+																	echo "Khách đã hủy";
+																	break;
+																case '4':
+																	echo "Nhân viên đã hủy";
+																	break;
+															}
+														?>
 													</td>
 													<td class="text-center">
-														<a class="btn btn-info btn-xs" href="admin/orders/view/id" role = "button">
+														<a class="btn btn-info btn-xs" href="/ShopMinh/orders/view/<?php echo $row['id']; ?>" role = "button">
 															<span class="glyphicon glyphicon-eye-open"></span> Xem 
 														</a>
-														<a class="btn btn-success btn-xs" href="admin/orders/restore/id" role = "button">
+														<a class="btn btn-success btn-xs" href="/ShopMinh/orders/restore/<?php echo $row['id']; ?>" role = "button">
 															<span class="glyphicon glyphicon-edit"></span>Khôi phục
 														</a>
 													</td>
 												</tr>
-											
+										<?php } ?>	
 										</tbody>
 									</table>
 								</div>
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<ul class="pagination">
-											phan trang
+											<?php echo $data['phantrang']; ?>
 										</ul>
 									</div>
 								</div>

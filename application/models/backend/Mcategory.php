@@ -1,8 +1,8 @@
 <?php 
 	class Mcategory extends DB{
 		// index category
-		public function select_category($trash){
-			$qr = "SELECT * FROM category WHERE trash=".$trash;
+		public function select_category($trash, $start, $limit){
+			$qr = "SELECT * FROM category WHERE trash=$trash order by created_at desc limit $start,$limit ";
 			$run = mysqli_query($this->con, $qr);
 			$category = array();
 			$num= mysqli_num_rows($run);
@@ -10,7 +10,25 @@
 				$category[] = $row;
 			}
 			
-			return array('category'=>$category,'num'=>$num);
+			return $category;
+	 	}
+	 	public function select_category_full($trash){
+			$qr = "select *from category where trash=".$trash;
+			$run = mysqli_query($this->con, $qr);
+			$category = array();
+			$num= mysqli_num_rows($run);
+			while ($row= $run->fetch_array()) {
+				$category[] = $row;
+			}
+			
+			return $category;
+	 	}
+	 	
+	 	// index category num
+		public function select_category_num($trash){
+			$run = mysqli_query($this->con, "SELECT * FROM category WHERE trash=$trash");
+			$num = mysqli_num_rows($run);
+			return $num;
 	 	}
 	 	public function select_category_status($trash){
 			$qr = "SELECT * FROM category WHERE status=1 and trash=".$trash;

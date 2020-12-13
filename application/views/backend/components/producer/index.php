@@ -51,7 +51,7 @@
 													<td><?php echo $row['name']; ?></td>
 													<td><?php echo $row['keyword']; ?></td>
 													<td class="text-center">
-														<a href="/ShopMinh/producer/index/<?php echo $row['id']; ?>">
+														<a href="/ShopMinh/producer/status/<?php echo $row['id']; ?>">
 															<?php if($row['status']==1){?>
 																<span class="glyphicon glyphicon-ok-circle mauxanh18"></span>
 															<?php }else{?>
@@ -78,7 +78,7 @@
 									<div class="row">
 										<div class="col-md-12 text-center">
 											<ul class="pagination">
-												phan Trang
+												<?php echo $data['phantrang']; ?>
 											</ul>
 										</div>
 									</div>

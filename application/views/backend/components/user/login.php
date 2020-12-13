@@ -18,22 +18,26 @@
             </div>
             <hr>
             <div class="myform">
-                <form name="form1" action="check_user" method="post" role="form">
+                <form name="form1" action="/ShopMinh/user/login" method="post" role="form">
                     <div class="row form-row">
                         <div class="input-group">
                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                            <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập">
-                          
-                        </div>
-                        <div class="error" id="password_error">username</div>
+                       </div>
+                          <?php if(isset($_COOKIE['error_username'])){ ?>
+                                    <div class="error" style="color: red" id="password_error"><?php echo $_COOKIE['error_username'];?></div>
+                                <?php } ?>
+                        
                     </div>
                     <div class="row form-row">
                         <div class="input-group">
                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                            <input type="password" name="pass" class="form-control" placeholder="Mật khẩu">
-                          
-                        </div>
-                        <div class="error" id="password_error">pass</div>
+                       </div>
+                          <?php if(isset($_COOKIE['error_pass'])){ ?>
+                                    <div class="error" style="color: red" id="password_error"><?php echo $_COOKIE['error_pass'];?></div>
+                                <?php } ?>
+                       
                     </div>
                     <div class="row form-row" style="width:100%; margin-top: 15px;">
                         <input type="submit" name="submit" value="Đăng nhập" class="form-control btn btn-primary btn-login">

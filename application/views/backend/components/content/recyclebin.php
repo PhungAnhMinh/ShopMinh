@@ -46,7 +46,7 @@
 														<img src="/ShopMinh/public/images/posts/<?php echo $content['thumbnail']; ?>" alt="title" class="img-responsive">
 													</td>
 													<td><?php echo $content['title']; ?></td>
-													<td><?php echo $content['created']; ?></td>
+													<td><?php echo $content['created_at']; ?></td>
 													<td><?php echo $content['created_by']; ?></td>
 													<td class="text-center">
 														<a class="btn btn-success btn-xs" href="/ShopMinh/content/restore/<?php echo $content['id']; ?>" role = "button">
@@ -69,7 +69,7 @@
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<ul class="pagination">
-											phan trang
+											<?php echo $data['phantrang']; ?>
 										</ul>
 									</div>
 								</div>

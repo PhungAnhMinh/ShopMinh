@@ -49,7 +49,7 @@
 												<td class="text-center"><?php echo $row['title']; ?></td>
 
 												<td class="text-center">
-													<a href="/ShopMinh/contact/index/<?php echo $row['id']; ?>">
+													<a href="/ShopMinh/contact/status/<?php echo $row['id']; ?>">
 													<?php if($row['status']==0){ ?>
 															<span class="glyphicon glyphicon-ok-circle mauxanh18" title="Chưa xem"></span>
 													<?php }else{ ?>	
@@ -75,7 +75,7 @@
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<ul class="pagination">
-											phan trang
+											<?php echo $data['phantrang']; ?>
 										</ul>
 									</div>
 								</div>

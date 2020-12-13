@@ -31,47 +31,41 @@
 </div>
 <div class="container" style="margin-bottom: 20px;">
     <div class="owl-carousel owl-carousel-product owl-theme" style="border: 1px solid #0f9ed8;">
-       
+       <?php foreach ($data['product'] as $row) {?>
             <div class="item" style="margin: 0px;">
                 <div class="products-sale">
                     <div class="lt-product-group-image">
                         <a href="alias" title="name>" >
-                            <img class="img-p"src="public/images/products/avatar>" alt="">
+                            <img class="img-p"src="/ShopMinh/public/images/products/<?php echo $row['thumbnail']; ?>" alt="">
                         </a>
 
-                        
+                        <?php if($row['sale']>0){ ?>
                             <div class="giam-percent">
-                                <span class="text-giam-percent">Giảm 35%</span>
+                                <span class="text-giam-percent">Giảm <?php echo $row['sale']; ?>%</span>
                             </div>
-                        
+                        <?php } ?>
                     </div>
                     <div class="lt-product-group-info">
                         <a href="alias" title="name" style="text-align: left;">
-                            <h3>name</h3>
+                            <h3><?php echo $row['name']; ?></h3>
                         </a>
                         <div class="price-box">
                             
 
                                 <p class="old-price">
-                                    <span class="price">4765₫</span>
+                                    <span class="price"><?php echo $row['price']; ?>₫</span>
                                 </p>
                                 <p class="special-price">
-                                    <span class="price">746537₫</span>
+                                    <span class="price"><?php echo $row['price_sale']; ?>₫</span>
                                 </p>
                                 
-                                 <p class="old-price">
-                                    <span class="price" style="color: #fff">7456347₫</span>
-                                </p>
-                                <p class="special-price">
-                                    <span class="price">4765374₫</span>
-                                </p>
                             
                         </div>
                         <div class="clear"></div>
                     </div>
                 </div>
             </div>
-        
+        <?php } ?>
     </div>
 </div>
 

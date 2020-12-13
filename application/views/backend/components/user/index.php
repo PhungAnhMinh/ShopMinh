@@ -4,10 +4,10 @@
 		<h1><i class="glyphicon glyphicon-cd"></i> Danh sách tài khoản cửa hàng</h1>
 		<div class="breadcrumb">
 			
-						<a class='btn btn-primary btn-sm' href="/ShopMinh/useradmin/insert" role='button'>
+						<a class='btn btn-primary btn-sm' href="/ShopMinh/user/insert" role='button'>
 							<span class='fa fa-user-plus'></span> Thêm mới
 						</a>
-			<a class="btn btn-primary btn-sm" href="/ShopMinh/useradmin/recyclebin" role="button">
+			<a class="btn btn-primary btn-sm" href="/ShopMinh/user/recyclebin" role="button">
 				<span class="glyphicon glyphicon-trash"></span> Thùng rác (<?php echo $data['num']; ?>)
 			</a>
 		</div>
@@ -47,7 +47,7 @@
 										</tr>
 									</thead>
 									<tbody>
-									<?php foreach ($data['useradmin'] as $row) {?>
+									<?php foreach ($data['user'] as $row) {?>
 										<tr>
 											<td class="text-center"><?php echo $row['id']; ?></td>
 											<td style="width:100px">
@@ -58,7 +58,7 @@
 											<td><?php echo $row['phone']; ?></td>
 											<td><?php echo $row['address']; ?></td>
 											<td class="text-center">
-												<a href="/ShopMinh/useradmin/index/<?php echo $row['id']; ?>">
+												<a href="/ShopMinh/user/status/<?php echo $row['id']; ?>">
 													<?php if($row['status']==1){ ?>
 														<span class="glyphicon glyphicon-ok-circle mauxanh18"></span>
 													<?php }else{ ?>
@@ -67,12 +67,12 @@
 												</a>
 											</td>
 											<td class="text-center">
-												<a class="btn btn-success btn-xs" href="/ShopMinh/useradmin/update/<?php echo $row['id']; ?>" role = "button">
+												<a class="btn btn-success btn-xs" href="/ShopMinh/user/update/<?php echo $row['id']; ?>" role = "button">
 													<span class="glyphicon glyphicon-edit"></span> Sửa
 												</a>
 											</td>
 											<td class="text-center">
-												<a class="btn btn-danger btn-xs" href="/ShopMinh/useradmin/trash/<?php echo $row['id']; ?>" onclick="return confirm('Xác nhận xóa loại sản phẩm này ?')" role = "button">
+												<a class="btn btn-danger btn-xs" href="/ShopMinh/user/trash/<?php echo $row['id']; ?>" onclick="return confirm('Xác nhận xóa loại sản phẩm này ?')" role = "button">
 													<span class="glyphicon glyphicon-trash"></span> Xóa
 												</a>
 											</td>
@@ -85,7 +85,7 @@
 							<div class="row">
 								<div class="col-md-12 text-center">
 									<ul class="pagination">
-										phan trang
+										<?php echo $data['phantrang']; ?>
 									</ul>
 								</div>
 							</div>

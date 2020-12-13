@@ -69,7 +69,7 @@
 							<div class="row">
 								<div class="col-md-12 text-center">
 									<ul class="pagination">
-										phan trang
+										<?php echo $data['phantrang']; ?>
 									</ul>
 								</div>
 							</div>

@@ -39,9 +39,12 @@
             <ul class="menu-right" style="display: inline-block;">
                 <li class="pull-left"><a href="">Trang chủ</a></li>
                 <li class="pull-left"><a href="san-pham">Sản phẩm</a></li>
-                <li class="pull-left">
-                    <a href='san-pham/link '>name</a>
-                </li>
+                <?php $row_cate = $this->model_cate->select_category_level(1); ?>
+                <?php foreach ($row_cate as $row) {?>
+                    <li class="pull-left">
+                        <a href='san-pham/link '><?php echo $row['name']; ?></a>
+                    </li>
+                <?php } ?>
                 <li class="pull-left"><a href="tin-tuc/1">Tin tức</a></li>
                 <li class="pull-left"><a href="gioi-thieu">Giới thiệu</a></li>
                 <li class="pull-left"><a href="lien-he">Liên hệ</a></li>

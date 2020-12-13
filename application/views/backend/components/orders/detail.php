@@ -3,7 +3,7 @@
 	<section class="content-header">
 		<h1><i class="glyphicon glyphicon-shopping-cart"></i> Chi tiết đơn hàng</h1>
 		<div class="breadcrumb">
-			<a class="btn btn-primary btn-sm" href="admin/orders" role="button">
+			<a class="btn btn-primary btn-sm" href="/ShopMinh/orders/index" role="button">
 				<span class="glyphicon glyphicon-trash"></span> Thoát
 			</a>
 		</div>
@@ -16,16 +16,14 @@
 					<div class="box-body">
 						<!--ND-->
 						<div id="view">
-							<form action="admin/orders/detail/id" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+							<form action="/ShopMinh/orders/detail/<?php echo $data['row']['id']; ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 								
 								<h1 class="text-center" style="color: red;">CHI TIẾT ĐƠN HÀNG</h1>
-								<h4>Tên khách hàng: <b>full name</b></h4>
-								<h4>Điện thoại: <i>phone</i></h4>
-								<h4>Thời gian đặt hàng: <i>orderdate</i></h4>
-								<h4>Địa chỉ: <?php echo $order['address']; ?>,
-									
-								</h4>
-								<h4>Mã đơn hàng: <b>order code</b></h4>
+								<h4>Tên khách hàng: <b><?php echo $data['row']['fullname']; ?></b></h4>
+								<h4>Điện thoại: <i><?php echo $data['row']['phone']; ?></i></h4>
+								<h4>Thời gian đặt hàng: <i><?php echo $data['row']['orderDate']; ?></i></h4>
+								<h4>Địa chỉ: <i><?php echo $data['row']['address']; ?></i></h4>
+								<h4>Mã đơn hàng: <b><?php echo $data['row']['orderCode']; ?></b></h4>
 								<br />
 								<div class="table-responsive">
 									<table class="table table-hover table-bordered">
@@ -39,32 +37,32 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+											<?php $stt =0; ?>
+											<?php foreach ($data['order'] as $row) {?>
 												<tr>
-													<td class="text-center">stt</td>
-													<td>name</td>
-													<td class="text-center">count</td>
-													<td>3654263 ₫</td>
+													<td class="text-center"><?php echo $stt +=1; ?></td>
+													<td><?php echo $row['name']; ?></td>
+													<td class="text-center"><?php echo $row['count']; ?></td>
+													<td><?php echo $row['price']; ?> ₫</td>
 													<td class="text-right">
-														8333333₫
+														<?php echo $row['count'] * $row['price']; ?>₫
 													</td>
 												</tr>
-											
+											<?php } ?>
 											<tr>
-												<td colspan="6" class="text-right" style="border: none; font-size: 1.1em;">Tổng cộng: 454543₫</td>
+												<td colspan="6" class="text-right" style="border: none; font-size: 1.1em;">Tổng cộng: <?php echo $data['row']['money'] - $row['price_ship'] + $row['coupon']; ?>₫</td>
 											</tr>
 											<tr>
-												<td colspan="6" class="text-right" style="border: none; font-size: 1.1em;">Voucher giảm giá : 63726472₫</td>
-											</tr>';
-											}
-											?>
+												<td colspan="6" class="text-right" style="border: none; font-size: 1.1em;">Voucher giảm giá : <?php echo $data['row']['coupon']; ?>₫</td>
+											</tr>
+											
 											<tr>
 												<td colspan="6" class="text-right" style="border: none; font-size: 0.9em;"><i>Phí vận chuyển: </i>
-													364536₫
+													<?php echo $data['row']['price_ship']; ?>₫
 												</td>
 											</tr>
 											<tr>
-												<td colspan="6" class="text-right" style="border: none; color: red; font-size: 1.3em;">Thành tiền: 4364563₫</td>
+												<td colspan="6" class="text-right" style="border: none; color: red; font-size: 1.3em;">Thành tiền: <?php echo $data['row']['money']; ?>₫</td>
 											</tr>
 											
 											<tr>
@@ -80,6 +78,7 @@
 								<div class="row">
 									<div class="col-md-12 text-right">
 										<ul class="pagination">
+
 										</ul>
 									</div>
 								</div>

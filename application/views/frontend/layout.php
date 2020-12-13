@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <title>
         
-        Smart Store - Điện thoại, Laptop, Link kiện chính hãng
+        ShopMinh - Điện thoại, Laptop, Phụ kiện
        
     </title>
     <link rel="icon" type="image/x-icon" href="public/images/cart2.png">

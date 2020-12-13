@@ -64,7 +64,7 @@
         </li>
         <li class="user-footer">
             <div class="pull-left">
-                <a href="admin/useradmin/update/id" class="btn btn-default btn-flat">Chi tiết</a>
+                <a href="/ShopMinh/user/update/<?php echo $_SESSION['row']['id']; ?>" class="btn btn-default btn-flat">Chi tiết</a>
             </div>
             <div class="pull-right">
                 <a href="/ShopMinh/user/logout" class="btn btn-default btn-flat">Thoát</a>

@@ -24,7 +24,7 @@
 									<?php echo $_COOKIE['msg']; ?>
 									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 								</div>
-							<?php } ?>
+						<?php } ?>
 					<div class="box-body">
 						<div class="row" style='padding:0px; margin:0px;'>
 							<!--ND-->
@@ -52,7 +52,7 @@
 											<td><?php echo $row['limit_number']; ?></td>
 											<td><?php echo $row['expiration_date']; ?></td>
 											<td class="text-center">
-												<a href="/ShopMinh/coupon/index/<?php echo $row['id']; ?>">
+												<a href="/ShopMinh/coupon/status/<?php echo $row['id']; ?>">
 													<?php if($row['status']==1){ ?>
 														<span class="glyphicon glyphicon-ok-circle mauxanh18"></span>
 													<?php }else{ ?>
@@ -78,7 +78,7 @@
 							<div class="row">
 								<div class="col-md-12 text-center">
 									<ul class="pagination">
-										phan trang
+										<?php echo $data['phantrang']; ?>
 									</ul>
 								</div>
 							</div>

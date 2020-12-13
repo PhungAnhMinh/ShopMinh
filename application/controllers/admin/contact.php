@@ -3,63 +3,111 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 session_start();
 class contact extends controller{
 	public $model;
+	public $extension;
+	public $pagination;
 	public function __construct(){
 		$this->model=$this->models_backend("Mcontact");
+		$this->extension = $this->library_backend("extension");
+		$this->pagination = $this->library_backend("pagination");
 	}
 
-	public function index(){	
-		$url = $this->getUrl($_GET['url'],'/');
-		$row = $this->model->select_contact(1);
-		$num = $this->model->select_contact(0);
-		if(isset($url[2])){
+	public function index(){
+			$url = $this->extension->getUrl($_GET['url'],'/');
+				// tổng số bản ghi 
+			$total_records = $this->model->select_contact_num(1);
+			$limit =10;
+
+			$param = isset($url[2])?$url[2]:'';
+			//Khởi tạo class
+			$config = [
+			    'total_records' => $total_records, 
+			    'limit' => $limit,
+			    'fullpage' => false, //bỏ qua nếu không muốn hiển thị full page
+			    'param' => $param,
+			    'url'=> '/ShopMinh/contact/index/'
+			    ];
+
+			$pagination = new $this->pagination($config); 
+			// số bản ghi bắt đầu
+			$start = ($pagination->getCurrentPage() - 1) * $limit; 
+			$row = $this->model->select_contact(1, $start, $limit);
+			$phantrang = $pagination->getPagination();
+			$num = $this->model->select_contact_num(0);
+			
+			$this->views_backend("components/contact/index",[
+								"contact"=>$row,
+								"phantrang"=>$phantrang,
+								"num"=>$num
+				   ]);
+		}
+
+	// status
+		public function status(){
+			$url = $this->extension->getUrl($_GET['url'],'/');
 			$row = $this->model->select_contact_where_id($url[2]);
 			$status = 0;
 			if($row['status']==$status){
-				$status = 1;
+					$status = 1;
 			}
 			$run = $this->model->update_contact_where_id($url[2],$status);
-			$this->echo_run($run,'msg','Cập nhật thành công','Cập nhật thất bại','/ShopMinh/contact/index','/ShopMinh/contact/index');
+			$this->extension->echo_run($run,'msg','Cập nhật thành công','Cập nhật thất bại','/ShopMinh/contact/index','/ShopMinh/contact/index');
+			
 		}
-		else{	
-			$this->views_backend("components/contact/index",[
-								"contact"=>$row['contact'],
-								"num"=>$num['num'],
-				   ]);}
-
-	}
 	public function detail(){
-		$url = $this->getUrl($_GET['url'],'/');
+		$url = $this->extension->getUrl($_GET['url'],'/');
 		$row = $this->model->select_contact_where_id($url[2]);
 		$this->views_backend("components/contact/detail",[
 						"row"=>$row
 						]);
 
 	}
-	// Thùng rác 
-	public function recyclebin(){
-		$row = $this->model->select_contact(0);
-		$this->views_backend("components/contact/recyclebin",[
-							"contact"=>$row['contact'],
-						]);
-		}
+	
 	// delete into trash
 	public function trash(){
 		$trash = 0;
-		$url = $this->getUrl($_GET['url'],'/');
+		$url = $this->extension->getUrl($_GET['url'],'/');
 		$run = $this->model->recyclebin_contact($trash,$url[2]);
-		$this->echo_run($run,'msg','Xóa liên hệ vào thùng rác thành công','Xóa liên hệ vào thùng rác thất bại','/ShopMinh/contact/index','/ShopMinh/contact/index');
+		$this->extension->echo_run($run,'msg','Xóa liên hệ vào thùng rác thành công','Xóa liên hệ vào thùng rác thất bại','/ShopMinh/contact/index','/ShopMinh/contact/index');
 		
 	}
+	// Thùng rác 
+	public function recyclebin(){
+		$url = $this->extension->getUrl($_GET['url'],'/');
+				// tổng số bản ghi 
+			$total_records = $this->model->select_contact_num(0);
+			$limit =10;
+
+			$param = isset($url[2])?$url[2]:'';
+			//Khởi tạo class
+			$config = [
+			    'total_records' => $total_records, 
+			    'limit' => $limit,
+			    'fullpage' => false, //bỏ qua nếu không muốn hiển thị full page
+			    'param' => $param,
+			    'url'=> '/ShopMinh/contact/recyclebin/'
+			    ];
+
+			$pagination = new $this->pagination($config); 
+			// số bản ghi bắt đầu
+			$start = ($pagination->getCurrentPage() - 1) * $limit; 
+			$row = $this->model->select_contact(0, $start, $limit);
+			$phantrang = $pagination->getPagination();
+			
+			$this->views_backend("components/contact/recyclebin",[
+								"contact"=>$row,
+								"phantrang"=>$phantrang
+				   ]);
+		}
 	public function restore(){
 		$trash = 1;
-		$url = $this->getUrl($_GET['url'],'/');
+		$url = $this->extension->getUrl($_GET['url'],'/');
 		$run = $this->model->recyclebin_contact($trash,$url[2]);
-		$this->echo_run($run,'msg','Khôi phục liên hệ thành công','Khôi phục liên hệ thất bại','/ShopMinh/contact/recyclebin','/ShopMinh/contact/recyclebin');
+		$this->extension->echo_run($run,'msg','Khôi phục liên hệ thành công','Khôi phục liên hệ thất bại','/ShopMinh/contact/recyclebin','/ShopMinh/contact/recyclebin');
 	}
 	public function delete(){
-		$url = $this->getUrl($_GET['url'],'/');
+		$url = $this->extension->getUrl($_GET['url'],'/');
 		$run = $this->model->delete($url[2]);
-		$this->echo_run($run,'msg','Xóa liên hệ thành công','Xóa liên hệ thất bại','/ShopMinh/contact/recyclebin','/ShopMinh/contact/recyclebin');
+		$this->extension->echo_run($run,'msg','Xóa liên hệ thành công','Xóa liên hệ thất bại','/ShopMinh/contact/recyclebin','/ShopMinh/contact/recyclebin');
 		
 	}
 	

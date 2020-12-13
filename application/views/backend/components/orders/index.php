@@ -3,8 +3,8 @@
 	<section class="content-header">
 		<h1><i class="glyphicon glyphicon-list-alt"></i> Danh sách đơn hàng</h1>
 		<div class="breadcrumb">
-			<a class="btn btn-primary btn-sm" href="admin/orders/recyclebin" role="button">
-				<span class="glyphicon glyphicon-trash"></span> Đơn hàng đã lưu (5)
+			<a class="btn btn-primary btn-sm" href="/ShopMinh/orders/recyclebin" role="button">
+				<span class="glyphicon glyphicon-trash"></span> Đơn hàng đã lưu (<?php echo $data['num']; ?>)
 			</a>
 		</div>
 	</section>
@@ -15,21 +15,14 @@
 					<div class="box-header with-border">
 						<!-- /.box-header -->
 						<div class="box-body">
-							
 								<div class="row">
+	                            <?php if(isset($_COOKIE['msg'])){ ?>
 									<div class="alert alert-success">
-										
-										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<?php echo $_COOKIE['msg']; ?>
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 									</div>
+								<?php } ?>
 								</div>
-							
-								<div class="row">
-									<div class="alert alert-error">
-										
-										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-									</div>
-								</div>
-							
 							<div class="row" style='padding:0px; margin:0px;'>
 								<!--ND-->
 								<div class="table-responsive">
@@ -47,64 +40,73 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+											<?php foreach ($data['orders'] as $row) {?>
 												<tr>
-													<td class="text-center">order code</td>
-													<td>full name</td>
-													<td>phone</td>
-													<td>63473₫</td>
-													<td>order date</td>
+													<td class="text-center"><?php echo $row['orderCode']; ?></td>
+													<td><?php echo $row['fullname']; ?></td>
+													<td><?php echo $row['phone']; ?></td>
+													<td><?php echo $row['money']; ?></td>
+													<td><?php echo $row['orderDate']; ?></td>
 													<td style="text-align: center;">
-														
-															Đang chờ duyệt
-															 <br>
-															 dang giao hang
-															<br>
-															da giao
-															<br>
-															khach da huy
-															<br>
-															Nhan vien da huy
-														
+														<?php  
+															switch ($row['status']) {
+																case '0':
+																	echo "Đang chờ duyệt";
+																	break;
+																case '1':
+																	echo "Đang giao hàng";
+																	break;
+																case '2':
+																	echo "Đã giao";
+																	break;
+																case '3':
+																	echo "Khách đã hủy";
+																	break;
+																case '4':
+																	echo "Nhân viên đã hủy";
+																	break;
+															}
+														?>
 													</td>
 													<td style="text-align: center;">
-														
-															<a class="btn btn-success btn-xs" href="admin/orders/status/id"  onclick="return confirm('Xác nhận đơn hàng đã giao và thanh toán thành công ?')" role = "button">
+														<?php if($row['status']==1): ?>
+															<a class="btn btn-success btn-xs" href="/ShopMinh/orders/status/<?php echo $row['id']; ?>"  onclick="return confirm('Xác nhận đơn hàng đã giao và thanh toán thành công ?')" role = "button">
 																<i class="fa  fa-thumbs-o-up"></i> Xác nhận thanh toán
 															</a>
-														</div>
-														
-															<a class="btn btn-default btn-xs" href="admin/orders/status/id"  onclick="return confirm('Xác nhận gói hàng và chuẩn bị giao hàng ?')" role = "button">
+														<?php endif ?>
+
+														<?php if($row['status']==0): ?>
+															<a class="btn btn-default btn-xs" href="/ShopMinh/orders/status/<?php echo $row['id']; ?>"  onclick="return confirm('Xác nhận gói hàng và chuẩn bị giao hàng ?')" role = "button">
 																<i class="fa fa-check-square-o"></i> Duyệt đơn đặt hàng
 															</a>
-														
+														<?php endif ?>
 														<td>
-															
-																<a class="btn btn-danger btn-xs" href="admin/orders/cancelorder/id"  onclick="return confirm('Xác nhận hủy đơn hàng này ?')" role = "button">
+														<?php if($row['status']<2): ?>	
+																<a class="btn btn-danger btn-xs" href="/ShopMinh/orders/cancelOrder/<?php echo $row['id']; ?>"  onclick="return confirm('Xác nhận hủy đơn hàng này ?')" role = "button">
 																	<i class="fa fa-save"></i> Hủy đơn
 																</a>
-															
+														<?php endif ?>	
 														</td>
 													</td>
 													<td class="text-center">
 														<!-- /Xem -->
-														<a class="btn btn-info btn-xs" href="admin/orders/detail/id" role = "button">
+														<a class="btn btn-info btn-xs" href="/ShopMinh/orders/detail/<?php echo $row['id']; ?>" role = "button">
 															<span class="glyphicon glyphicon-eye-open"></span> Xem 
 														</a>
 														<!-- /Xóa -->
-														<a class="btn bg-olive btn-xs" href="admin/orders/trash/id"  onclick="return confirm('Xác nhận lưu đơn hàng này ?')" role = "button">
+														<a class="btn bg-olive btn-xs" href="/ShopMinh/orders/trash/<?php echo $row['id']; ?>"  onclick="return confirm('Xác nhận lưu đơn hàng này ?')" role = "button">
 															<i class="fa fa-save"></i> Lưu đơn
 														</a>
 													</td>
 												</tr>
-											
+											<?php } ?>
 										</tbody>
 									</table>
 								</div>
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<ul class="pagination">
-											phan Trang
+											<?php echo $data['phantrang']; ?>
 										</ul>
 									</div>
 								</div>
